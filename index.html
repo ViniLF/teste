@@ -5,35 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Fazendo conexão do CSS -->
     <link rel="stylesheet" href="assets/css/styles.css">
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/21.6.0/i18next.min.js"></script>
     <title>Teste</title>
 </head>
 <body>
     <header>
-       <div class="container">
-            <h1 class="logo">Vinícius<br>Lucas</h1> <!-- Logo à esquerda -->
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">Vinícius</a><br>
+                <a href="index.html">Lucas</a>
+            </div>
             <nav class="navbar">
                 <ul class="nav-links">
-                    <li class="nav-link active">
+                    <li class="nav-link active" id="home">
                         <a href="#">Home</a>
                     </li>
-                    <li class="nav-link">
+                    <li class="nav-link" id="contact">
                         <a href="#">Contact</a>
                     </li>
-                    <li class="nav-link">
+                    <li class="nav-link" id="projects">
                         <a href="#">Projects</a>
                     </li>
-                    <li class="nav-link">
+                    <li class="nav-link" id="about">
                         <a href="#">About</a>
                     </li>
                 </ul>
             </nav>
             <div class="language-container">
-                <h1 class="english">En</h1>
-                <h1 class="portuguese">Pt-Br</h1>
+                <button class="english" onclick="changeLanguage('en')">En</button>
+                <button class="portuguese" onclick="changeLanguage('pt')">Pt-Br</button>
             </div>
-       </div>
+        </div>
     </header>    
+
+    <section class="home">
+        <h1 id="title" class="title"></h1>
+        <h2 class="subtitle">Developer</h2>
+    </section>    
 
     <!-- Fazendo conexão do JS -->
     <script src="assets/js/script.js"></script>
