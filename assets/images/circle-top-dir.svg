@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 100" width="200%" height="200%">
+    <!-- Desenhando um arco de 120 graus -->
+    <path d="M 30 90 
+             m -60 0 
+             a 45 45 0 0 1 70 120
+             a  0 0 0 0 0
+             z" 
+          fill="none" stroke="white" stroke-width="0.5"/>
+</svg>
