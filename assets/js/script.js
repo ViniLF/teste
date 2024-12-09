@@ -1,93 +1,3 @@
-// Inicialização do i18next com traduções
-i18next.init({
-    lng: 'en', // Idioma padrão
-    resources: {
-        en: {
-            translation: {
-                home: "Home",
-                contact: "Contact",
-                projects: "Projects",
-                about: "About",
-                projectsButton: "Projects",
-                aboutButton: "About Me"
-            }
-        },
-        pt: {
-            translation: {
-                home: "Início",
-                contact: "Contato",
-                projects: "Projetos",
-                about: "Sobre",
-                projectsButton: "Projetos",
-                aboutButton: "Sobre Mim"
-            }
-        }
-    }
-}, function(err, t) {
-    if (err) {
-        console.error("Erro ao inicializar o i18next:", err);
-    } else {
-        console.log("i18next inicializado com sucesso");
-        updateContent();  // Atualiza o conteúdo assim que o i18next for inicializado
-    }
-});
-
-// Função para atualizar o conteúdo com base na tradução
-function updateContent() {
-    const links = {
-        home: 'home',
-        contact: 'contact',
-        projects: 'projects',
-        about: 'about',
-        projectsButton: 'projectsButton',
-        aboutButton: 'aboutButton'
-    };
-
-    // Atualiza o texto de todos os elementos com as chaves de tradução
-    Object.keys(links).forEach(key => {
-        const element = document.getElementById(key);
-        if (element) {
-            element.innerText = i18next.t(links[key]);
-        }
-
-        // Atualizando os botões de "Projects" e "About Me"
-        const projectButton = document.querySelector('.project');
-        const aboutButton = document.querySelector('.aboutme');
-
-        if (projectButton) {
-            projectButton.innerText = i18next.t('projectsButton');
-        }
-
-        if (aboutButton) {
-            aboutButton.innerText = i18next.t('aboutButton');
-        }
-    });
-}
-
-// Função para mudar o idioma
-function changeLanguage(lng) {
-    console.log("Mudando idioma para:", lng);
-    i18next.changeLanguage(lng, function(err, t) {
-        if (err) {
-            console.error("Erro ao mudar idioma:", err);
-        } else {
-            console.log("Idioma mudado para:", lng);
-            updateContent();
-            updateLanguageButton(lng);
-        }
-    });
-}
-
-// Função para atualizar o botão de idioma ativo
-function updateLanguageButton(lng) {
-    document.querySelectorAll('.language-container button').forEach(button => {
-        button.classList.remove('active');
-    });
-
-    const activeButton = lng === 'en' ? '.language-container .english' : '.language-container .portuguese';
-    document.querySelector(activeButton).classList.add('active');
-}
-
 const titles = ["Full-Stack", "JavaScript", "React", "Node.js", "PHP", "Python"];
 let currentTitle = 0;
 const titleElement = document.querySelector(".title");
@@ -152,3 +62,60 @@ function eraseText(text) {
 window.onload = function() {
     setTimeout(() => typeText(titles[currentTitle]), 2000);
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    const aboutMeContent = document.querySelector('.aboutme-content');
+
+    // Função para aplicar fade-in quando a seção entra na tela
+    aboutMeContent.classList.add('fade-in');
+});
+
+// Função para detectar quando a seção entra na tela ao rolar
+window.addEventListener('scroll', function() {
+    const aboutMeSection = document.getElementById('aboutme');
+    const aboutMeContent = document.querySelector('.aboutme-content');
+
+    const sectionTop = aboutMeSection.getBoundingClientRect().top;
+    const windowHeight = window.innerHeight;
+
+    // Verifica se a seção está visível na tela
+    if (sectionTop < windowHeight - 100) {
+        aboutMeContent.classList.add('fade-in'); // Ativa o efeito de fade-in
+    }
+});
+
+// Função para mover o .aboutme-content com base no movimento do mouse
+const aboutMeContent = document.querySelector('.aboutme-content');
+
+// Movimentação ao passar o mouse dentro de .aboutme-content
+aboutMeContent.addEventListener('mousemove', function(e) {
+    const rect = aboutMeContent.getBoundingClientRect();
+    const offsetX = e.clientX - rect.left;
+    const offsetY = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const moveX = (offsetX - centerX) / centerX * 10;
+    const moveY = (offsetY - centerY) / centerY * 10;
+
+    aboutMeContent.style.transform = `translate(${moveX}px, ${moveY}px)`; // Aplica a transformação de movimento
+});
+
+// Resetando o movimento ao sair do .aboutme-content
+aboutMeContent.addEventListener('mouseleave', function() {
+    aboutMeContent.style.transform = 'translate(0, 0)'; // Volta para a posição inicial
+});
+
+// Função para aplicar o efeito hover com JS (opcional)
+aboutMeContent.addEventListener('mouseenter', () => {
+    aboutMeContent.style.transform = 'scale(1.05)';
+    aboutMeContent.style.boxShadow = '0 15px 30px rgba(0, 0, 0, 0.3)';
+    aboutMeContent.style.backgroundColor = 'var(--highlight-color)';
+});
+
+aboutMeContent.addEventListener('mouseleave', () => {
+    aboutMeContent.style.transform = 'scale(1)';
+    aboutMeContent.style.boxShadow = '0 10px 20px rgba(0, 0, 0, 0.1)';
+    aboutMeContent.style.backgroundColor = 'var(--primary-bg)';
+});
+
