@@ -9,7 +9,10 @@ i18next.init({
                 projects: "Projects",
                 about: "About Me",
                 projectsButton: "Projects",
-                aboutButton: "About Me"
+                aboutButton: "About Me",
+                aboutmeTitle: "About Me",
+                aboutmeP1: "Hi, I'm Vinícius – a web developer fueled by a passion for innovation and problem-solving. I craft responsive, intuitive websites that prioritize user experience and leverage the latest technologies to drive business growth.",
+                aboutmeP2: "Outside of coding, I’m an avid traveler, family-oriented, and always looking to explore new places and ideas. My mission? To build websites that not only look great but deliver real results for businesses and users alike."
             }
         },
         pt: {
@@ -19,7 +22,10 @@ i18next.init({
                 projects: "Projetos",
                 about: "Sobre Mim",
                 projectsButton: "Projetos",
-                aboutButton: "Sobre Mim"
+                aboutButton: "Sobre Mim",
+                aboutmeTitle: "Sobre Mim",
+                aboutmeP1: "Olá, sou Vinícius – um desenvolvedor web movido pela paixão por inovação e resolução de problemas. Eu crio sites responsivos e intuitivos que priorizam a experiência do usuário e alavancam as últimas tecnologias para impulsionar o crescimento dos negócios.",
+                aboutmeP2: "Fora da codificação, sou um viajante ávido, voltado para a família e sempre procurando explorar novos lugares e ideias. Minha missão? Construir sites que não apenas tenham uma ótima aparência, mas que ofereçam resultados reais para empresas e usuários."
             }
         }
     }
@@ -44,21 +50,12 @@ function updateContent() {
     Object.keys(links).forEach(key => {
         const element = document.getElementById(key);
         if (element) {
-            // Atualiza apenas o texto dentro do link <a> (não altera estrutura interna)
             const linkText = i18next.t(links[key]);
             const anchor = element.querySelector('a');
             if (anchor) {
                 anchor.innerText = linkText; // Atualiza o texto dentro do <a>
             }
         }
-    });
-
-    // Re-aplica os listeners de clique (se necessário)
-    document.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', function(e) {
-            // Lógica para o clique no link
-            console.log('Link clicado:', e.target);
-        });
     });
 
     // Atualiza os botões de "Projects" e "About Me"
@@ -71,6 +68,23 @@ function updateContent() {
 
     if (aboutButton) {
         aboutButton.textContent = i18next.t('aboutButton');
+    }
+
+    // Atualiza o título e os parágrafos da seção "About Me"
+    const aboutTitle = document.querySelector('.aboutme-title');
+    const aboutParagraph1 = document.querySelector('.aboutme-p1');
+    const aboutParagraph2 = document.querySelector('.aboutme-p2');
+
+    if (aboutTitle) {
+        aboutTitle.textContent = i18next.t('aboutmeTitle');
+    }
+
+    if (aboutParagraph1) {
+        aboutParagraph1.textContent = i18next.t('aboutmeP1');
+    }
+
+    if (aboutParagraph2) {
+        aboutParagraph2.textContent = i18next.t('aboutmeP2');
     }
 }
 
