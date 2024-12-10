@@ -1,4 +1,4 @@
-const titles = ["Full-Stack", "JavaScript", "React", "Node.js", "PHP", "Python"];
+const titles = ["Front-End", "JavaScript", "React", "Node.js", "PHP", "Python"];
 let currentTitle = 0;
 const titleElement = document.querySelector(".title");
 
@@ -64,26 +64,36 @@ window.onload = function() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    const aboutMeContent = document.querySelector('.aboutme-content');
-    const aboutMeSection = document.getElementById('aboutme');
-  
-    // Função para aplicar fade-in quando a seção entra na tela
-    function checkVisibility(entries, observer) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                aboutMeContent.classList.add('fade-in');
-                observer.unobserve(entry.target); // Stop observing after fade-in
-            }
-        });
-    }
-
-    // Utilizando Intersection Observer para melhorar a performance de visibilidade
-    const observer = new IntersectionObserver(checkVisibility, {
-        threshold: 0.1, // A seção será observada quando 10% dela estiver visível
+    // Configura o ScrollReveal para aplicar animações a todas as seções, exceto a home
+    ScrollReveal().reveal('section:not(.home) *', {
+        origin: 'left',       // A animação vai começar a partir da esquerda
+        distance: '100px',    // A distância que o elemento vai percorrer durante a animação
+        duration: 1000,       // Duração da animação em milissegundos
+        delay: 200,           // Delay antes da animação começar
+        opacity: 0,           // Inicia invisível e vai até 100% de opacidade
+        scale: 0.9,           // Começa com uma escala menor
+        easing: 'ease-out',   // Suavização do movimento
+        reset: false,         // Não reinicia a animação
+        once: true,           // A animação acontece apenas uma vez
+        viewFactor: 0.2       // A animação ocorre quando 20% do elemento estiver visível
     });
-    observer.observe(aboutMeSection); // Inicia a observação
 
-    // Função para movimentação do mouse (efeito parallax)
+    // Se você quiser customizar para elementos específicos dentro de uma seção:
+    ScrollReveal().reveal('.aboutme-content', {
+        origin: 'right',      // A animação vai começar a partir da direita
+        distance: '100px',
+        duration: 1000,
+        delay: 300,
+        opacity: 0,
+        scale: 0.9,
+        easing: 'ease-out',
+        reset: false,
+        once: true,
+        viewFactor: 0.2
+    });
+
+    // Função de movimento de mouse (efeito parallax) que você já tem
+    const aboutMeContent = document.querySelector('.aboutme-content');
     aboutMeContent.addEventListener('mousemove', function(e) {
         const rect = aboutMeContent.getBoundingClientRect();
         const offsetX = e.clientX - rect.left;
@@ -94,33 +104,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const moveX = (offsetX - centerX) / centerX * 10;
         const moveY = (offsetY - centerY) / centerY * 10;
 
-        aboutMeContent.style.transform = `translate(${moveX}px, ${moveY}px)`; // Aplica a transformação de movimento
+        aboutMeContent.style.transform = `translate(${moveX}px, ${moveY}px)`;
     });
 
-    // Resetando o movimento ao sair do .aboutme-content
     aboutMeContent.addEventListener('mouseleave', function() {
-        aboutMeContent.style.transform = 'translate(0, 0)'; // Volta para a posição inicial
+        aboutMeContent.style.transform = 'translate(0, 0)';
     });
-});
-
-document.addEventListener('scroll', function() {
-    const homeSection = document.querySelector('.home');
-    const aboutMeSection = document.querySelector('.aboutme');
-    
-    const homeSectionBottom = homeSection.getBoundingClientRect().bottom;
-    const aboutMeSectionTop = aboutMeSection.getBoundingClientRect().top;
-
-    // Adiciona sombra na parte inferior da Home
-    if (homeSectionBottom < window.innerHeight) {
-        homeSection.classList.add('with-bottom-shadow');
-    } else {
-        homeSection.classList.remove('with-bottom-shadow');
-    }
-
-    // Adiciona sombra no topo da About Me
-    if (aboutMeSectionTop < window.innerHeight) {
-        aboutMeSection.classList.add('with-top-shadow');
-    } else {
-        aboutMeSection.classList.remove('with-top-shadow');
-    }
 });
