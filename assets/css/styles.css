@@ -3,12 +3,12 @@
 :root {
     --primary-bg: #121212;
     --secondary-bg: #3d3d3d;
+    --modal-color: #1f1f1f;
+    --submodal-color: #3d3d3d;
     --highlight-color: #f5f5f5;
-    --accent-color: #a6a6a6;
-    --text-color: #f5f5f5;
+    --text-low: #a6a6a6;
     --text-light: #f4f4f4;
-    --border-color: #333;
-    --aboutme-color: #1f1f1f;
+    --standard-color: #0a76cf;
 }
 
 * {
@@ -21,6 +21,21 @@ html {
     scroll-behavior: smooth;
     scroll-padding-top: 80px;
 }
+
+::-webkit-scrollbar {
+    width: 8px;
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #007bff;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
 
 body {
     background-color: var(--primary-bg);
@@ -96,6 +111,7 @@ header {
     cursor: pointer;
     transition: transform 0.3s ease;
     z-index: 1;
+    
 }
 
 .nav-link a {
@@ -111,13 +127,13 @@ header {
 }
 
 .nav-link.active {
-    background-color: var(--secondary-bg);
+    background-color: var(--standard-color);
     border-radius: 1.2rem;
     z-index: 1;
 }
 
 .nav-link:hover, .nav-link.active:hover {
-    background-color: var(--secondary-bg);
+    background-color: var(--standard-color);
     color: var(--highlight-color);
     border-radius: 1.2rem;
     transform: scale(1.1);
@@ -215,7 +231,7 @@ header {
     font-family: "Fira Code", sans-serif;
     font-weight: 500;
     font-size: 7rem;
-    color: var(--highlight-color);
+    color: var(--standard-color);
     margin-top: 10px;
     line-height: 1.2;
 }
@@ -309,27 +325,27 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 90vh;
     padding: 0;
     margin: 0;
-    background-color: var(--aboutme-color);
+    background-color: var(--modal-color);
     box-sizing: border-box;
 }
 
 .aboutme-title {
     font-weight: 200;
-    font-size: 1.1rem;
+    font-size: 1rem;
     font-family: "Fira Code", sans-serif;
     letter-spacing: 1px;
     position: absolute;
     top: 10px;
     left: 10px;
-    color: var(--primary-color);
+    color: var(--text-low);
     z-index: 10;
 }
 
 .aboutme-container {
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--standard-color);
     display: flex;
     padding: 25px;
     background-color: var(--primary-bg);
@@ -337,6 +353,7 @@ header {
     align-items: center;
     max-width: 1100px;
     width: 100%;
+    height: 70vh;
     gap: 20px;
     box-sizing: border-box;
 }
@@ -350,7 +367,7 @@ header {
     position: relative;
     width: 35%;
     max-width: 800px;
-    background-color: var(--border-color);
+    background-color: var(--submodal-color);
     border-radius: 20px;
     padding: 40px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
@@ -367,7 +384,7 @@ header {
 .aboutme-content .aboutme-p2 {
     font-size: 1rem;
     line-height: 1.6;
-    color: var(--accent-color);
+    color: var(--text-low);
     margin-bottom: 20px;
     text-align: justify;
     opacity: 0;
@@ -378,12 +395,12 @@ header {
 /* Estilo no hover */
 .aboutme-content .aboutme-p1:hover, 
 .aboutme-content .aboutme-p2:hover {
-    color: var(--secondary-bg);
+    color: var(--submodal-color);
 }
 
 
 .aboutme-content h2 {
-    color: var(--accent-color);
+    color: var(--text-low);
 }
 
 @keyframes fadeIn {
@@ -422,4 +439,12 @@ header {
 .aboutme:hover::before {
     opacity: 0.4;
     filter: blur(4px); /* Efeito de desfoque no fundo */
+}
+
+.experience-title {
+    font-weight: 200;
+    font-size: 1rem;
+    font-family: "Fira Code", sans-serif;
+    letter-spacing: 1px;
+    color: var(--text-low);
 }

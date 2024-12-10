@@ -13,7 +13,8 @@ i18next.init({
                 aboutmeTitle: "About Me...",
                 sobreMim: "Who i am",
                 aboutmeP1: "Hi, I'm Vinícius Lucas – a Frontend Developer & UI Designer fueled by a passion for innovation and problem-solving. I craft responsive, intuitive websites that prioritize user experience and leverage the latest technologies to drive business growth.",
-                aboutmeP2: "Outside of coding, I’m an avid traveler, family-oriented, and always looking to explore new places and ideas. My mission? To build websites that not only look great but deliver real results for businesses and users alike."
+                aboutmeP2: "Outside of coding, I’m an avid traveler, family-oriented, and always looking to explore new places and ideas. My mission? To build websites that not only look great but deliver real results for businesses and users alike.",
+                experienceTitle: "Experience..."
             }
         },
         pt: {
@@ -27,7 +28,8 @@ i18next.init({
                 aboutmeTitle: "Sobre Mim...",
                 sobreMim: "Quem eu sou",
                 aboutmeP1: "Olá, sou Vinícius Lucas – um Frontend Developer & UI Designer movido pela paixão por inovação e resolução de problemas. Eu crio sites responsivos e intuitivos que priorizam a experiência do usuário e alavancam as últimas tecnologias para impulsionar o crescimento dos negócios.",
-                aboutmeP2: "Fora da codificação, sou um viajante ávido, voltado para a família e sempre procurando explorar novos lugares e ideias. Minha missão? Construir sites que não apenas tenham uma ótima aparência, mas que ofereçam resultados reais para empresas e usuários."
+                aboutmeP2: "Fora da codificação, sou um viajante ávido, voltado para a família e sempre procurando explorar novos lugares e ideias. Minha missão? Construir sites que não apenas tenham uma ótima aparência, mas que ofereçam resultados reais para empresas e usuários.",
+                experienceTitle: "Experiência..."
             }
         }
     }
@@ -92,6 +94,9 @@ function updateContent() {
 
     if (sobreMimElement) {
         sobreMimElement.textContent = i18next.t('sobreMim'); // Atualiza o texto do "sobreMim"
+    }
+    if (experienceTitle) {
+        experienceTitle.textContent = i18next.t('experienceTitle'); // Atualiza o texto do "sobreMim"
     }
 }
 

@@ -64,9 +64,9 @@ window.onload = function() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Configura o ScrollReveal para aplicar animações a todas as seções, exceto a home
-    ScrollReveal().reveal('section:not(.home) *', {
-        origin: 'left',       // A animação vai começar a partir da esquerda
+    // Configura o ScrollReveal para aplicar animações a todas as seções, exceto a home e a aboutme-container
+    ScrollReveal().reveal('section:not(.home) *:not(.aboutme-container) *', {
+        origin: 'top',       // A animação vai começar a partir de cima
         distance: '100px',    // A distância que o elemento vai percorrer durante a animação
         duration: 1000,       // Duração da animação em milissegundos
         delay: 200,           // Delay antes da animação começar
@@ -78,36 +78,32 @@ document.addEventListener('DOMContentLoaded', function() {
         viewFactor: 0.2       // A animação ocorre quando 20% do elemento estiver visível
     });
 
-    // Se você quiser customizar para elementos específicos dentro de uma seção:
-    ScrollReveal().reveal('.aboutme-content', {
-        origin: 'right',      // A animação vai começar a partir da direita
-        distance: '100px',
-        duration: 1000,
-        delay: 300,
-        opacity: 0,
-        scale: 0.9,
-        easing: 'ease-out',
-        reset: false,
-        once: true,
-        viewFactor: 0.2
+    // Animação para a aboutme-container e todos os seus filhos, exceto a própria container
+    ScrollReveal().reveal('.aboutme-container *', {
+        origin: 'left',       // A animação vai começar a partir de cima
+        distance: '40px',    // A distância que o elemento vai percorrer durante a animação
+        duration: 1000,       // Duração da animação em milissegundos
+        delay: 300,           // Delay antes da animação começar
+        opacity: 0,           // Inicia invisível e vai até 100% de opacidade
+        scale: 0.9,           // Começa com uma escala menor
+        easing: 'ease-out',   // Suavização do movimento
+        reset: false,         // Não reinicia a animação
+        once: true,           // A animação acontece apenas uma vez
+        viewFactor: 0.2       // A animação ocorre quando 20% do elemento estiver visível
     });
 
-    // Função de movimento de mouse (efeito parallax) que você já tem
-    const aboutMeContent = document.querySelector('.aboutme-content');
-    aboutMeContent.addEventListener('mousemove', function(e) {
-        const rect = aboutMeContent.getBoundingClientRect();
-        const offsetX = e.clientX - rect.left;
-        const offsetY = e.clientY - rect.top;
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-
-        const moveX = (offsetX - centerX) / centerX * 10;
-        const moveY = (offsetY - centerY) / centerY * 10;
-
-        aboutMeContent.style.transform = `translate(${moveX}px, ${moveY}px)`;
-    });
-
-    aboutMeContent.addEventListener('mouseleave', function() {
-        aboutMeContent.style.transform = 'translate(0, 0)';
+    // Animação para os títulos dentro da seção 'aboutme' e 'experience'
+    ScrollReveal().reveal('h1.aboutme-title, h1.experience-title', {
+        origin: 'left',     // A animação vai começar a partir de baixo
+        distance: '20px',     // Distância do movimento durante a animação
+        duration: 800,        // Duração da animação
+        delay: 500,           // Delay para começar a animação
+        opacity: 0,           // Começa invisível
+        scale: 1,             // Escala normal (sem diminuição)
+        easing: 'ease-out',   // Suavização do movimento
+        reset: false,         // Não reinicia a animação
+        once: true,           // A animação acontece apenas uma vez
+        viewFactor: 0.2       // A animação ocorre quando 20% do elemento estiver visível
     });
 });
+
