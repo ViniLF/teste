@@ -1,7 +1,9 @@
+// Lista de títulos a serem exibidos e a variável que mantém o índice atual
 const titles = ["Front-End", "JavaScript", "React", "Node.js", "PHP", "Python"];
 let currentTitle = 0;
 const titleElement = document.querySelector(".title");
 
+// Função que digita o texto caractere por caractere
 function typeText(text) {
     let index = 0;
     titleElement.innerHTML = '';
@@ -10,9 +12,10 @@ function typeText(text) {
     cursor.classList.add('cursor');
     titleElement.appendChild(cursor);
 
-    let lastTime = 0; 
-    const typingSpeed = 100;
+    let lastTime = 0;
+    const typingSpeed = 100;  // Velocidade de digitação
 
+    // Função recursiva que simula a digitação do texto
     function typeCharacter(timestamp) {
         if (timestamp - lastTime >= typingSpeed) {
             lastTime = timestamp;
@@ -29,14 +32,16 @@ function typeText(text) {
         }
     }
 
-    requestAnimationFrame(typeCharacter);
+    requestAnimationFrame(typeCharacter);  // Inicia o efeito de digitação
 }
 
+// Função que apaga o texto
 function eraseText(text) {
     let index = text.length;
-    const eraseSpeed = 120; 
+    const eraseSpeed = 120;  // Velocidade de apagamento
     let lastTime = 0;
 
+    // Função recursiva que apaga o texto caractere por caractere
     function eraseCharacter(timestamp) {
         if (timestamp - lastTime >= eraseSpeed) {
             lastTime = timestamp;
@@ -46,7 +51,6 @@ function eraseText(text) {
             if (index >= 0) {
                 requestAnimationFrame(eraseCharacter);
             } else {
-                // Atualiza o índice de currentTitle para o próximo título na lista
                 currentTitle = (currentTitle + 1) % titles.length;
                 setTimeout(() => typeText(titles[currentTitle]), 500);
             }
@@ -58,52 +62,64 @@ function eraseText(text) {
     requestAnimationFrame(eraseCharacter);
 }
 
-// Inicia o efeito de digitação ao carregar a página
+// Inicializa o efeito de digitação após o carregamento da página
 window.onload = function() {
-    setTimeout(() => typeText(titles[currentTitle]), 2000);
+    setTimeout(() => typeText(titles[currentTitle]), 2000);  // Começa a digitar após 2 segundos
 }
 
+// Configura os efeitos de ScrollReveal para os elementos da página
 document.addEventListener('DOMContentLoaded', function() {
-    // Configura o ScrollReveal para aplicar animações a todas as seções, exceto a home e a aboutme-container
-    ScrollReveal().reveal('section:not(.home) *:not(.aboutme-container) *', {
-        origin: 'top',       // A animação vai começar a partir de cima
-        distance: '100px',    // A distância que o elemento vai percorrer durante a animação
-        duration: 1000,       // Duração da animação em milissegundos
-        delay: 200,           // Delay antes da animação começar
-        opacity: 0,           // Inicia invisível e vai até 100% de opacidade
-        scale: 0.9,           // Começa com uma escala menor
-        easing: 'ease-out',   // Suavização do movimento
-        reset: false,         // Não reinicia a animação
-        once: true,           // A animação acontece apenas uma vez
-        viewFactor: 0.2       // A animação ocorre quando 20% do elemento estiver visível
+    // Animações de Reveal para os elementos com diferentes delays
+    ScrollReveal().reveal('.delay-slow', {
+        origin: 'top',          // A animação começa de cima
+        distance: '100px',      // Distância do movimento durante a animação
+        duration: 1000,         // Duração de 1 segundo
+        delay: 200,             // Delay de 1 segundo
+        opacity: 0,             // Começa invisível
+        scale: 0.9,             // Escala menor no início
+        easing: 'ease-out',     // Suavização da animação
+        reset: false,           // Não reinicia a animação
+        once: true,             // A animação ocorre apenas uma vez
+        viewFactor: 0.2         // A animação ocorre quando 20% do elemento estiver visível
     });
 
-    // Animação para a aboutme-container e todos os seus filhos, exceto a própria container
-    ScrollReveal().reveal('.aboutme-container *', {
-        origin: 'left',       // A animação vai começar a partir de cima
-        distance: '40px',    // A distância que o elemento vai percorrer durante a animação
-        duration: 1000,       // Duração da animação em milissegundos
-        delay: 300,           // Delay antes da animação começar
-        opacity: 0,           // Inicia invisível e vai até 100% de opacidade
-        scale: 0.9,           // Começa com uma escala menor
-        easing: 'ease-out',   // Suavização do movimento
-        reset: false,         // Não reinicia a animação
-        once: true,           // A animação acontece apenas uma vez
-        viewFactor: 0.2       // A animação ocorre quando 20% do elemento estiver visível
+    ScrollReveal().reveal('.delay-medium', {
+        origin: 'top',
+        distance: '100px',
+        duration: 700,
+        delay: 200,
+        opacity: 0,
+        scale: 0.9,
+        easing: 'ease-out',
+        reset: false,
+        once: true,
+        viewFactor: 0.2
     });
 
-    // Animação para os títulos dentro da seção 'aboutme' e 'experience'
-    ScrollReveal().reveal('h1.aboutme-title, h1.experience-title', {
-        origin: 'left',     // A animação vai começar a partir de baixo
-        distance: '20px',     // Distância do movimento durante a animação
-        duration: 800,        // Duração da animação
-        delay: 500,           // Delay para começar a animação
-        opacity: 0,           // Começa invisível
-        scale: 1,             // Escala normal (sem diminuição)
-        easing: 'ease-out',   // Suavização do movimento
-        reset: false,         // Não reinicia a animação
-        once: true,           // A animação acontece apenas uma vez
-        viewFactor: 0.2       // A animação ocorre quando 20% do elemento estiver visível
+    ScrollReveal().reveal('.delay-fast', {
+        origin: 'top',
+        distance: '100px',
+        duration: 400,
+        delay: 200,
+        opacity: 0,
+        scale: 0.9,
+        easing: 'ease-out',
+        reset: false,
+        once: true,
+        viewFactor: 0.2
+    });
+
+    // Aplicando ScrollReveal aos parágrafos com classes específicas
+    ScrollReveal().reveal('.aboutme-p1, .aboutme-p2', {
+        origin: 'top', 
+        distance: '50px',
+        duration: 700,
+        delay: 200,
+        opacity: 0,
+        scale: 0.9,
+        easing: 'ease-out',
+        reset: false,
+        once: true,
+        viewFactor: 0.2
     });
 });
-
